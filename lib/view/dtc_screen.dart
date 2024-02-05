@@ -37,7 +37,6 @@ class DTC_Screen extends StatelessWidget {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                             children: [
-                              Text('Code :'),
                               Text('Mistakes :'),
                             ]),
                       ),

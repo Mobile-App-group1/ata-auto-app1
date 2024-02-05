@@ -1,47 +1,34 @@
 import 'dart:io';
 
-import 'package:ata_auto_app/responsive/responsive.dart';
-import 'package:ata_auto_app/view/garage.dart';
-import 'package:ata_auto_app/view/dtc_screen.dart';
-import 'package:ata_auto_app/view/home_page.dart';
-import 'package:ata_auto_app/view/shop_screen.dart';
-import 'package:ata_auto_app/view/trainging_screen.dart';
-import 'package:flashy_tab_bar2/flashy_tab_bar2.dart';
+import 'package:ata_auto_app/controller/routhpage.dart';
+import 'package:ata_auto_app/view/tall_me_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
+import 'package:ata_auto_app/view/home_page.dart';
+import 'package:ata_auto_app/view/garage.dart';
+import 'package:ata_auto_app/view/shop_screen.dart';
+import 'package:ata_auto_app/view/dtc_screen.dart';
+import 'package:ata_auto_app/view/trainging_screen.dart';
+import 'package:flashy_tab_bar2/flashy_tab_bar2.dart';
 
-class RoutesPage extends StatefulWidget {
-  const RoutesPage({super.key});
+import '../responsive/responsive.dart';
 
-  @override
-  State<RoutesPage> createState() => _RoutesPageState();
-}
+class RoutesPage extends StatelessWidget {
+  final RoutesController routesController = Get.put(RoutesController());
 
-class _RoutesPageState extends State<RoutesPage> {
-  int _selectedIndex = 0;
-
-  static final List<Widget> _widgetOptions = <Widget>[
+  final List<Widget> _widgetOptions = <Widget>[
     const Home_Page(),
     const Garage_Screen(),
     const Shop_Screen(),
     const DTC_Screen(),
-    Training_Screen(),
+    const Training_Screen(),
   ];
-  void _onItemTapped(int index) {
-    setState(() {
-      _selectedIndex = index;
-    });
-  }
 
   @override
-  void initState() {
-    super.initState();
-  }
-
   Widget build(BuildContext context) {
-    final width = MediaQuery.of(context).size.width;
     final height = MediaQuery.of(context).size.height;
+    final width = MediaQuery.of(context).size.width;
     return Scaffold(
       drawer: Drawer(
         child: SizedBox(
@@ -219,79 +206,97 @@ class _RoutesPageState extends State<RoutesPage> {
         ),
       ),
       appBar: AppBar(
-        actions: [],
-      ),
-      body: _widgetOptions[_selectedIndex],
-      bottomNavigationBar: FlashyTabBar(
-        shadows: const [
-          BoxShadow(blurRadius: 4, color: Colors.grey, offset: Offset(10, 4))
+        actions: [
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Container(
+              decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(10),
+                  color: Colors.white,
+                  boxShadow: [
+                    BoxShadow(
+                      blurRadius: 4,
+                      color: Colors.grey.withOpacity(0.5),
+                    )
+                  ]),
+              child: TextButton.icon(
+                  onPressed: () async {
+                    Get.to(Tell_User_About_UseApp());
+                  },
+                  icon: Icon(Icons.engineering),
+                  label: Text('Tell Me')),
+            ),
+          )
         ],
-        animationDuration: Durations.long1,
-        backgroundColor: colorBlue,
-        items: [
-          FlashyTabBarItem(
-            activeColor: colorsWhite,
-            icon: const Icon(
-              Icons.home_sharp,
-              color: Colors.black,
-            ),
-            title: const Text(
-              'Home',
-              style: TextStyle(fontSize: 18),
-            ),
-          ),
-          FlashyTabBarItem(
-            activeColor: colorsWhite,
-            icon: const Icon(
-              Icons.garage_outlined,
-              color: Colors.black,
-            ),
-            title: const Text(
-              'Garage',
-              style: TextStyle(fontSize: 18),
-            ),
-          ),
-          FlashyTabBarItem(
-            activeColor: colorsWhite,
-            icon: const Icon(
-              Icons.shopping_cart,
-              color: Colors.black,
-            ),
-            title: const Text(
-              'Shop',
-              style: TextStyle(fontSize: 18),
-            ),
-          ),
-          FlashyTabBarItem(
-            activeColor: colorsWhite,
-            icon: const Icon(
-              Icons.engineering_rounded,
-              color: Colors.black,
-            ),
-            title: const Text(
-              'DTC',
-              style: TextStyle(fontSize: 18),
-            ),
-          ),
-          FlashyTabBarItem(
-            activeColor: colorsWhite,
-            icon: const Icon(
-              Icons.desktop_mac_sharp,
-              color: Colors.black,
-            ),
-            title: const Text(
-              'Training',
-              style: TextStyle(fontSize: 18),
-            ),
-          ),
-        ],
-        onItemSelected: _onItemTapped,
-        iconSize: 20,
-        height: 55,
-        showElevation: false,
-        selectedIndex: _selectedIndex,
-        animationCurve: Curves.linear,
       ),
+      body: Obx(() => _widgetOptions[routesController.selectedIndex.value]),
+      bottomNavigationBar: Obx(() => FlashyTabBar(
+            onItemSelected: routesController.changeIndex,
+            selectedIndex: routesController.selectedIndex.value,
+            shadows: const [
+              BoxShadow(
+                  blurRadius: 4, color: Colors.grey, offset: Offset(10, 4))
+            ],
+            animationDuration: Durations.long1,
+            backgroundColor: colorBlue,
+            items: [
+              FlashyTabBarItem(
+                activeColor: colorsWhite,
+                icon: const Icon(
+                  Icons.home_sharp,
+                  color: Colors.black,
+                ),
+                title: const Text(
+                  'Home',
+                  style: TextStyle(fontSize: 18),
+                ),
+              ),
+              FlashyTabBarItem(
+                activeColor: colorsWhite,
+                icon: const Icon(
+                  Icons.garage_outlined,
+                  color: Colors.black,
+                ),
+                title: const Text(
+                  'Garage',
+                  style: TextStyle(fontSize: 18),
+                ),
+              ),
+              FlashyTabBarItem(
+                activeColor: colorsWhite,
+                icon: const Icon(
+                  Icons.shopping_cart,
+                  color: Colors.black,
+                ),
+                title: const Text(
+                  'Shop',
+                  style: TextStyle(fontSize: 18),
+                ),
+              ),
+              FlashyTabBarItem(
+                activeColor: colorsWhite,
+                icon: const Icon(
+                  Icons.engineering_rounded,
+                  color: Colors.black,
+                ),
+                title: const Text(
+                  'DTC',
+                  style: TextStyle(fontSize: 18),
+                ),
+              ),
+              FlashyTabBarItem(
+                activeColor: colorsWhite,
+                icon: const Icon(
+                  Icons.desktop_mac_sharp,
+                  color: Colors.black,
+                ),
+                title: const Text(
+                  'Training',
+                  style: TextStyle(fontSize: 18),
+                ),
+              ),
+            ],
+          )),
     );
   }
 }
