@@ -1,11 +1,14 @@
+import 'package:ata_auto_app/controller/translate.dart';
 import 'package:ata_auto_app/widget/boxbutton.dart';
+import 'package:ata_auto_app/widget/product.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import '../model/translate_product.dart';
 import '../responsive/responsive.dart';
 
 class Datalist_Product_Home extends StatelessWidget {
-  const Datalist_Product_Home({super.key});
-
+  Datalist_Product_Home({super.key});
+  final Translatedata translate = Get.put(Translatedata());
   @override
   Widget build(BuildContext context) {
     final width = MediaQuery.of(context).size.width;
@@ -42,16 +45,27 @@ class Datalist_Product_Home extends StatelessWidget {
                 ),
                 Padding(
                   padding: const EdgeInsets.only(left: 8),
-                  child: Text(
-                    'Tital :',
-                    style: gettextstylewhite(context),
+                  child: Obx(
+                    () => Text(
+                      translate.check.value == false
+                          ? product_tr[0].name_eg
+                          : product_tr[0].name_kh,
+                      style: gettextstylblackname(context),
+                    ),
                   ),
                 ),
-                Padding(
-                  padding: const EdgeInsets.only(left: 8),
-                  child: Text(
-                    'Price :',
-                    style: gettextstylered(context),
+                SizedBox(
+                  width: width * 0.5,
+                  child: Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Obx(
+                      () => Text(
+                        translate.check.value == false
+                            ? product_tr[0].price_eg
+                            : product_tr[0].price_kh,
+                        style: gettextstylered(context),
+                      ),
+                    ),
                   ),
                 ),
               ],
@@ -76,45 +90,58 @@ class Datalist_Product_Home extends StatelessWidget {
                 height: 10,
               ),
               Padding(
-                padding: EdgeInsets.all(8.0),
-                child: Text(
-                  'Brand :',
-                  style: gettextstylgreytexproduct(context),
+                padding: const EdgeInsets.all(8.0),
+                child: Obx(
+                  () => Text(
+                    translate.check.value == false
+                        ? product_tr[0].brand_eg
+                        : product_tr[0].brand_kh,
+                    style: gettextstylgreytexproduct(context),
+                  ),
                 ),
               ),
               Padding(
-                padding: const EdgeInsets.only(left: 8),
-                child: Text(
-                  'Prius :',
-                  style: gettextstylgreytexproduct(context),
+                padding: const EdgeInsets.all(8.0),
+                child: Obx(
+                  () => Text(
+                    translate.check.value == false
+                        ? product_tr[0].category_eg
+                        : product_tr[0].category_kh,
+                    style: gettextstylgreytexproduct(context),
+                  ),
                 ),
               ),
               Padding(
-                padding: EdgeInsets.all(8.0),
-                child: Text(
-                  'Category :',
-                  style: gettextstylgreytexproduct(context),
+                padding: const EdgeInsets.all(8.0),
+                child: Obx(
+                  () => Text(
+                    translate.check.value == false
+                        ? product_tr[0].part_eg
+                        : product_tr[0].part_kh,
+                    style: gettextstylgreytexproduct(context),
+                  ),
                 ),
               ),
               Padding(
-                padding: const EdgeInsets.only(left: 8),
-                child: Text(
-                  'Part :',
-                  style: gettextstylgreytexproduct(context),
+                padding: const EdgeInsets.all(8.0),
+                child: Obx(
+                  () => Text(
+                    translate.check.value == false
+                        ? product_tr[0].year_eg
+                        : product_tr[0].year_kh,
+                    style: gettextstylgreytexproduct(context),
+                  ),
                 ),
               ),
               Padding(
-                padding: EdgeInsets.all(8.0),
-                child: Text(
-                  'Year :',
-                  style: gettextstylgreytexproduct(context),
-                ),
-              ),
-              Padding(
-                padding: const EdgeInsets.only(left: 8),
-                child: Text(
-                  'Condition :',
-                  style: gettextstylgreytexproduct(context),
+                padding: const EdgeInsets.all(8.0),
+                child: Obx(
+                  () => Text(
+                    translate.check.value == false
+                        ? product_tr[0].condition_eg
+                        : product_tr[0].condition_kh,
+                    style: gettextstylgreytexproduct(context),
+                  ),
                 ),
               ),
               const SizedBox(
@@ -126,66 +153,10 @@ class Datalist_Product_Home extends StatelessWidget {
                   crossAxisCount: 2,
                   crossAxisSpacing: 10,
                   mainAxisSpacing: 10,
-                  childAspectRatio: (1 / 1 / 1),
+                  childAspectRatio: (1 / 1 / 1.1),
                   clipBehavior: Clip.antiAlias,
                   children: List.generate(4, (index) {
-                    return Container(
-                      decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(10),
-                          color: Colors.white,
-                          boxShadow: [
-                            BoxShadow(
-                                blurRadius: 4,
-                                color: Colors.grey.withOpacity(0.5))
-                          ]),
-                      child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Padding(
-                              padding: const EdgeInsets.all(8.0),
-                              child: GestureDetector(
-                                onTap: () async =>
-                                    Get.to(Datalist_Product_Home()),
-                                child: Container(
-                                  height: height * 0.13,
-                                  decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(10),
-                                      color: colorBlue),
-                                  child: const Center(
-                                    child: Text('image'),
-                                  ),
-                                ),
-                              ),
-                            ),
-                            Padding(
-                              padding: const EdgeInsets.only(left: 8),
-                              child: Text(
-                                'Name',
-                                style: gettextstylblackname(context),
-                              ),
-                            ),
-                            Padding(
-                              padding: const EdgeInsets.only(left: 8),
-                              child: Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                children: [
-                                  Text(
-                                    'Tital',
-                                    style: gettextstylgreytital(context),
-                                  ),
-                                  Padding(
-                                    padding: const EdgeInsets.only(right: 8),
-                                    child: Text(
-                                      'Price',
-                                      style: gettextstylered(context),
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            ),
-                          ]),
-                    );
+                    return ProductItem(translate: translate);
                   })),
             ]),
           ),

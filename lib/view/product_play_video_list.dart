@@ -89,7 +89,7 @@ class Product_Playlist extends StatelessWidget {
                         Padding(
                           padding: const EdgeInsets.all(8.0),
                           child: Container(
-                            width: width * 0.3,
+                            width: width * 0.28,
                             decoration: BoxDecoration(
                                 color: Colors.white,
                                 borderRadius: BorderRadius.circular(10)),

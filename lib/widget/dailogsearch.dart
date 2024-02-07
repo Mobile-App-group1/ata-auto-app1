@@ -10,7 +10,7 @@ Future<void> ShowdialogSeach(BuildContext context) {
       return AlertDialog(
         title: const Text('Search Garage'),
         content: SizedBox(
-          height: height * 0.28,
+          height: height * 0.35,
           child: Column(
             children: [
               Padding(

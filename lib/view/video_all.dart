@@ -1,13 +1,16 @@
 import 'package:ata_auto_app/responsive/responsive.dart';
 import 'package:ata_auto_app/view/product_datalist_video_home.dart';
 import 'package:ata_auto_app/widget/form.dart';
+import 'package:ata_auto_app/widget/product_video.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:multi_dropdown/multiselect_dropdown.dart';
 
-class All_Videro_Home extends StatelessWidget {
-  const All_Videro_Home({super.key});
+import '../controller/translate.dart';
 
+class All_Videro_Home extends StatelessWidget {
+  All_Videro_Home({super.key});
+  final Translatedata translate = Get.put(Translatedata());
   @override
   Widget build(BuildContext context) {
     TextEditingController textseach = TextEditingController();
@@ -53,62 +56,7 @@ class All_Videro_Home extends StatelessWidget {
                 childAspectRatio: (1 / 0.4),
                 clipBehavior: Clip.antiAlias,
                 children: List.generate(10, (index) {
-                  return Container(
-                    decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(10),
-                        color: Colors.white,
-                        boxShadow: [
-                          BoxShadow(
-                              blurRadius: 10,
-                              color: Colors.grey.withOpacity(0.5))
-                        ]),
-                    child: Row(
-                      children: [
-                        Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: GestureDetector(
-                            onTap: () async =>
-                                Get.to(Datalist_Product_Video_Home()),
-                            child: Container(
-                              height: height,
-                              width: width * 0.3,
-                              decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(10),
-                                  color: colorBlue),
-                              child: const Center(
-                                child: Text('image'),
-                              ),
-                            ),
-                          ),
-                        ),
-                        Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Padding(
-                                padding: const EdgeInsets.only(left: 8),
-                                child: Text(
-                                  'Name',
-                                  style: gettextstylblackname(context),
-                                ),
-                              ),
-                              Padding(
-                                padding: const EdgeInsets.only(left: 8),
-                                child: Text(
-                                  'Tital',
-                                  style: gettextstylgreytital(context),
-                                ),
-                              ),
-                              Padding(
-                                padding: const EdgeInsets.only(left: 8),
-                                child: Text(
-                                  'Free',
-                                  style: gettextstylgreytital(context),
-                                ),
-                              ),
-                            ]),
-                      ],
-                    ),
-                  );
+                  return Product_Video(translate: translate);
                 })),
           ],
         ),

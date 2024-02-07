@@ -1,20 +1,21 @@
+import 'package:ata_auto_app/controller/translate.dart';
 import 'package:ata_auto_app/view/datalist_prodcut_screen.dart';
 import 'package:ata_auto_app/view/video_all.dart';
+import 'package:ata_auto_app/widget/product.dart';
+import 'package:ata_auto_app/widget/product_video.dart';
 import 'package:card_swiper/card_swiper.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../responsive/responsive.dart';
 import 'home_all_product.dart';
-import 'product_datalist_video_home.dart';
 
 class Home_Page extends StatelessWidget {
-  const Home_Page({super.key});
-
+  Home_Page({super.key});
+  final Translatedata translate = Get.put(Translatedata());
   @override
   Widget build(BuildContext context) {
-    final width = MediaQuery.of(context).size.width;
-    final height = MediaQuery.of(context).size.height;
+    final width = MediaQuery.sizeOf(context).width;
     return Scaffold(
       body: SingleChildScrollView(
           child: Column(
@@ -40,12 +41,21 @@ class Home_Page extends StatelessWidget {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Text('Product', style: gettextstylebluebold(context)),
+                Obx(
+                  () => Text(
+                    translate.check.value == false ? 'Product' : 'មុខទំនិញ',
+                    style: gettextstylebluebold(context),
+                  ),
+                ),
                 GestureDetector(
                   onTap: () async => Get.to(All_Product()),
-                  child: Text(
-                    'All Product',
-                    style: gettextstyleblueboldunderline(context),
+                  child: Obx(
+                    () => Text(
+                      translate.check.value == false
+                          ? 'Product'
+                          : 'គ្រុមមុខទំនិញទាំងអស់',
+                      style: gettextstyleblueboldunderline(context),
+                    ),
                   ),
                 )
               ],
@@ -60,65 +70,10 @@ class Home_Page extends StatelessWidget {
                 crossAxisSpacing: 10,
                 mainAxisSpacing: 10,
                 scrollDirection: flipAxis(Axis.horizontal),
-                childAspectRatio: (1 / 1 / 1),
+                childAspectRatio: (1 / 1 / 1.2),
                 clipBehavior: Clip.antiAlias,
                 children: List.generate(4, (index) {
-                  return Container(
-                    decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(10),
-                        color: Colors.white,
-                        boxShadow: [
-                          BoxShadow(
-                              blurRadius: 4,
-                              color: Colors.grey.withOpacity(0.5))
-                        ]),
-                    child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: GestureDetector(
-                              onTap: () async =>
-                                  Get.to(Datalist_Product_Home()),
-                              child: Container(
-                                height: height * 0.13,
-                                decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(10),
-                                    color: colorBlue),
-                                child: const Center(
-                                  child: Text('image'),
-                                ),
-                              ),
-                            ),
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.only(left: 8),
-                            child: Text(
-                              'Name',
-                              style: gettextstylblackname(context),
-                            ),
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.only(left: 8),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                Text(
-                                  'Tital',
-                                  style: gettextstylgreytital(context),
-                                ),
-                                Padding(
-                                  padding: const EdgeInsets.only(right: 8),
-                                  child: Text(
-                                    'Price',
-                                    style: gettextstylered(context),
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
-                        ]),
-                  );
+                  return ProductItem(translate: translate);
                 })),
           ),
           Column(
@@ -128,12 +83,21 @@ class Home_Page extends StatelessWidget {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Text('Videro', style: gettextstylebluebold(context)),
+                    Obx(
+                      () => Text(
+                        translate.check.value == false ? 'Video' : 'វិឌីអូរ',
+                        style: gettextstylebluebold(context),
+                      ),
+                    ),
                     GestureDetector(
                       onTap: () async => Get.to(All_Videro_Home()),
-                      child: Text(
-                        'All free video',
-                        style: gettextstyleblueboldunderline(context),
+                      child: Obx(
+                        () => Text(
+                          translate.check.value == false
+                              ? '​All Video'
+                              : 'វិឌីអូរទាំងអស់',
+                          style: gettextstyleblueboldunderline(context),
+                        ),
                       ),
                     )
                   ],
@@ -148,67 +112,7 @@ class Home_Page extends StatelessWidget {
                   childAspectRatio: (1 / 0.4),
                   clipBehavior: Clip.antiAlias,
                   children: List.generate(4, (index) {
-                    return Container(
-                      decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(10),
-                          color: Colors.white,
-                          boxShadow: [
-                            BoxShadow(
-                                blurRadius: 4,
-                                color: Colors.grey.withOpacity(0.5))
-                          ]),
-                      child: Row(
-                        children: [
-                          Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: GestureDetector(
-                              onTap: () async =>
-                                  Get.to((Datalist_Product_Video_Home())),
-                              child: Container(
-                                height: height,
-                                width: width * 0.3,
-                                decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(10),
-                                    color: colorBlue),
-                                child: const Center(
-                                  child: Text('image Pr videro'),
-                                ),
-                              ),
-                            ),
-                          ),
-                          SizedBox(
-                            child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Padding(
-                                    padding: const EdgeInsets.only(left: 8),
-                                    child: Text(
-                                      'Name',
-                                      style: gettextstylblackname(context),
-                                    ),
-                                  ),
-                                  Padding(
-                                    padding: const EdgeInsets.only(left: 8),
-                                    child: Text(
-                                      'Tital',
-                                      style: gettextstylgreytital(context),
-                                    ),
-                                  ),
-                                  Align(
-                                    alignment: Alignment.bottomRight,
-                                    child: Padding(
-                                      padding: const EdgeInsets.only(left: 8),
-                                      child: Text(
-                                        'Time',
-                                        style: gettextstylgreytital(context),
-                                      ),
-                                    ),
-                                  ),
-                                ]),
-                          ),
-                        ],
-                      ),
-                    );
+                    return Product_Video(translate: translate);
                   })),
             ],
           )
