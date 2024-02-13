@@ -1,11 +1,14 @@
 import 'package:ata_auto_app/responsive/responsive.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
+import '../controller/translate.dart';
+import '../model/garage_tr.dart';
 import '../widget/boxbutton.dart';
 
 class Garage_Product extends StatelessWidget {
-  const Garage_Product({super.key});
-
+  Garage_Product({super.key});
+  final Translatedata translate = Get.put(Translatedata());
   @override
   Widget build(BuildContext context) {
     final width = MediaQuery.of(context).size.width;
@@ -61,7 +64,9 @@ class Garage_Product extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          'Name Garage',
+                          translate.check.value == false
+                              ? garage_tr[0].name_eg
+                              : garage_tr[0].name_kh,
                           style: gettextstyltital(context),
                         ),
                         Padding(
@@ -80,23 +85,29 @@ class Garage_Product extends StatelessWidget {
                           ),
                         ),
                         Text(
-                          'Car expert :',
+                          translate.check.value == false
+                              ? garage_tr[0].car_expert_eg
+                              : garage_tr[0].car_expert_kh,
                           style: gettextstylblack(context),
                         ),
                       ],
                     )
                   ],
                 ),
-                const Row(
+                Row(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
                     Column(
                       children: [
-                        Icon(
+                        const Icon(
                           Icons.thumb_up,
                           color: Colors.grey,
                         ),
-                        Text('Count Like')
+                        Text(
+                          translate.check.value == false
+                              ? garage_tr[0].count_like_eg
+                              : garage_tr[0].count_like_kh,
+                        )
                       ],
                     ),
                     Column(
@@ -105,7 +116,11 @@ class Garage_Product extends StatelessWidget {
                           Icons.thumb_down,
                           color: Colors.grey,
                         ),
-                        Text('Count unLike')
+                        Text(
+                          translate.check.value == false
+                              ? garage_tr[0].count_unlike_eg
+                              : garage_tr[0].count_unlike_kh,
+                        )
                       ],
                     ),
                     Column(
@@ -114,7 +129,11 @@ class Garage_Product extends StatelessWidget {
                           Icons.comment,
                           color: Colors.grey,
                         ),
-                        Text('comment')
+                        Text(
+                          translate.check.value == false
+                              ? garage_tr[0].comment_eg
+                              : garage_tr[0].comment_kh,
+                        )
                       ],
                     )
                   ],

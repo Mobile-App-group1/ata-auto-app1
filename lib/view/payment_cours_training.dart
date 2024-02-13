@@ -2,13 +2,14 @@ import 'package:ata_auto_app/responsive/responsive.dart';
 import 'package:flutter/material.dart';
 
 import '../widget/boxbutton.dart';
+import 'alert_buy_sefety.dart';
 
 class Training_Cours_Pay extends StatelessWidget {
   Training_Cours_Pay({super.key});
 
   @override
   Widget build(BuildContext context) {
-    // final width = MediaQuery.of(context).size.width;
+    final width = MediaQuery.of(context).size.width;
     final height = MediaQuery.of(context).size.height;
     return Scaffold(
       appBar: AppBar(
@@ -24,7 +25,7 @@ class Training_Cours_Pay extends StatelessWidget {
       body: SingleChildScrollView(
         child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
           Container(
-            height: height * 0.4,
+            height: height * 0.8,
             decoration: BoxDecoration(
                 color: colorBlue,
                 boxShadow: const [BoxShadow(blurRadius: 4)],
@@ -60,6 +61,22 @@ class Training_Cours_Pay extends StatelessWidget {
                     'Expert :',
                     style: gettextstylewhitesmaill(context),
                   ),
+                  Text(
+                    'Location :',
+                    style: gettextstylewhitesmaill(context),
+                  ),
+                  Text(
+                    'Map :',
+                    style: gettextstylewhitesmaill(context),
+                  ),
+                  Text(
+                    'Contact :',
+                    style: gettextstylewhitesmaill(context),
+                  ),
+                  Text(
+                    'Facebook page :',
+                    style: gettextstylewhitesmaill(context),
+                  ),
                 ],
               ),
             ),
@@ -67,44 +84,81 @@ class Training_Cours_Pay extends StatelessWidget {
         ]),
       ),
       bottomNavigationBar: ButtonBarTheme(
-          data: ButtonBarThemeData(),
+          data: const ButtonBarThemeData(),
           child: Container(
-            height: height * 0.08,
-            decoration: const BoxDecoration(
-                borderRadius: BorderRadius.only(
-                    topLeft: Radius.circular(
-                      20,
-                    ),
-                    topRight: Radius.circular(20)),
+            height: height * 0.14,
+            decoration: BoxDecoration(
                 color: Colors.white,
-                boxShadow: [BoxShadow(blurRadius: 4, color: Colors.grey)]),
-            child: Row(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                boxShadow: [
+                  BoxShadow(
+                    blurRadius: 4,
+                    color: Colors.grey.withOpacity(0.5),
+                  )
+                ],
+                borderRadius: const BorderRadius.only(
+                    topLeft: Radius.circular(10),
+                    topRight: Radius.circular(10))),
+            child: Column(
               children: [
-                GestureDetector(
-                  onTap: () async {},
-                  child: ButtonProduct(
-                      backgrounColors: Colors.blue,
-                      bordercolos: Colors.blue,
-                      colorstext: Colors.white,
-                      name: 'Telegram'),
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Container(
+                    width: width,
+                    height: height * 0.05,
+                    decoration: BoxDecoration(
+                        color: colorsWhite,
+                        border: Border.all(width: 1, color: Colors.red),
+                        borderRadius: BorderRadius.circular(5)),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.only(left: 10),
+                          child: Text(
+                            'safety',
+                            style: gettextstylebluebold(context),
+                          ),
+                        ),
+                        IconButton(
+                            onPressed: () async {
+                              DialogTipForUserBuy(context);
+                            },
+                            icon: const Icon(
+                              Icons.security,
+                              color: Colors.red,
+                            ))
+                      ],
+                    ),
+                  ),
                 ),
-                GestureDetector(
-                  onTap: () async {},
-                  child: ButtonProduct(
-                      backgrounColors: Colors.pink,
-                      bordercolos: Colors.pink,
-                      colorstext: Colors.white,
-                      name: 'Facebook'),
-                ),
-                GestureDetector(
-                  onTap: () async {},
-                  child: ButtonProduct(
-                      backgrounColors: Colors.green,
-                      bordercolos: Colors.green,
-                      colorstext: Colors.white,
-                      name: 'Call'),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    GestureDetector(
+                      onTap: () async {},
+                      child: ButtonProduct(
+                          backgrounColors: Colors.blue,
+                          bordercolos: Colors.blue,
+                          colorstext: Colors.white,
+                          name: 'Telegram'),
+                    ),
+                    GestureDetector(
+                      onTap: () async {},
+                      child: ButtonProduct(
+                          backgrounColors: Colors.white,
+                          bordercolos: Colors.pink,
+                          colorstext: Colors.pink,
+                          name: 'Messeger'),
+                    ),
+                    GestureDetector(
+                      onTap: () async {},
+                      child: ButtonProduct(
+                          backgrounColors: Colors.green,
+                          bordercolos: Colors.green,
+                          colorstext: Colors.white,
+                          name: 'Call'),
+                    ),
+                  ],
                 ),
               ],
             ),

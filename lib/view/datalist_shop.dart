@@ -1,11 +1,15 @@
 import 'package:ata_auto_app/widget/boxbutton.dart';
+import 'package:ata_auto_app/widget/product.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
+import '../controller/translate.dart';
+import '../model/shop_product_tr.dart';
 import '../responsive/responsive.dart';
 
 class Datalist_shop extends StatelessWidget {
-  const Datalist_shop({super.key});
-
+  Datalist_shop({super.key});
+  final Translatedata translate = Get.put(Translatedata());
   @override
   Widget build(BuildContext context) {
     final width = MediaQuery.of(context).size.width;
@@ -61,7 +65,9 @@ class Datalist_shop extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          'Name Shop',
+                          translate.check.value == false
+                              ? shop_product[0].name_eg
+                              : shop_product[0].name_kh,
                           style: gettextstyltital(context),
                         ),
                         Padding(
@@ -79,42 +85,50 @@ class Datalist_shop extends StatelessWidget {
                             ],
                           ),
                         ),
-                        Text(
-                          'Car expert :',
-                          style: gettextstylblack(context),
-                        ),
                       ],
                     )
                   ],
                 ),
-                const Row(
+                Row(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
                     Column(
                       children: [
-                        Icon(
+                        const Icon(
                           Icons.thumb_up,
                           color: Colors.grey,
                         ),
-                        Text('Count Like')
+                        Text(
+                          translate.check.value == false
+                              ? shop_product[0].count_like_eg
+                              : shop_product[0].count_like_kh,
+                        )
                       ],
                     ),
                     Column(
                       children: [
-                        Icon(
+                        const Icon(
                           Icons.thumb_down,
                           color: Colors.grey,
                         ),
-                        Text('Count unLike')
+                        Text(
+                          translate.check.value == false
+                              ? shop_product[0].count_unlike_eg
+                              : shop_product[0].count_unlike_kh,
+                        )
                       ],
                     ),
                     Column(
                       children: [
-                        Icon(
+                        const Icon(
                           Icons.comment,
                           color: Colors.grey,
                         ),
-                        Text('comment')
+                        Text(
+                          translate.check.value == false
+                              ? shop_product[0].comment_eg
+                              : shop_product[0].comment_kh,
+                        )
                       ],
                     )
                   ],
@@ -135,55 +149,7 @@ class Datalist_shop extends StatelessWidget {
                   childAspectRatio: (1 / 1.2),
                   clipBehavior: Clip.antiAlias,
                   children: List.generate(6, (index) {
-                    return Card(
-                      child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Padding(
-                              padding: const EdgeInsets.all(8.0),
-                              child: Container(
-                                width: width,
-                                height: height * 0.17,
-                                decoration: BoxDecoration(
-                                    color: colorBlue,
-                                    borderRadius: BorderRadius.circular(10)),
-                                child: Center(
-                                  child: Text(
-                                    'IMG',
-                                    style: gettextstylewhite(context),
-                                  ),
-                                ),
-                              ),
-                            ),
-                            Padding(
-                              padding: const EdgeInsets.only(left: 8),
-                              child: Text(
-                                'Name',
-                                style: gettextstylblackname(context),
-                              ),
-                            ),
-                            Padding(
-                              padding: const EdgeInsets.only(left: 8),
-                              child: Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                children: [
-                                  Text(
-                                    'Tital',
-                                    style: gettextstylgreytital(context),
-                                  ),
-                                  Padding(
-                                    padding: const EdgeInsets.only(right: 8),
-                                    child: Text(
-                                      'Price',
-                                      style: gettextstylered(context),
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            ),
-                          ]),
-                    );
+                    return ProductItem(translate: translate);
                   })),
             )
           ]),

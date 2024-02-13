@@ -1,3 +1,4 @@
+import 'package:ata_auto_app/view/openning_app.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:responsive_framework/responsive_framework.dart';
@@ -23,7 +24,7 @@ class MyApp extends StatelessWidget {
         ],
       ),
       initialRoute: "/",
-      home: Signin_Screen(),
+      home: OpeningApp(),
       debugShowCheckedModeBanner: false,
     );
   }

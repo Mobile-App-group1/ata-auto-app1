@@ -1,7 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+
+import '../controller/translate.dart';
 
 class DTC_Screen extends StatelessWidget {
-  const DTC_Screen({super.key});
+  DTC_Screen({super.key});
+  Translatedata translate = Get.put(Translatedata());
 
   @override
   Widget build(BuildContext context) {
@@ -28,16 +32,20 @@ class DTC_Screen extends StatelessWidget {
                 mainAxisSpacing: 20,
                 childAspectRatio: (1 / 0.22),
                 clipBehavior: Clip.antiAlias,
-                children: List.generate(10, (index) {
+                children: List.generate(1, (index) {
                   return GestureDetector(
-                    child: const Card(
+                    child: Card(
                       child: Padding(
                         padding: EdgeInsets.all(8.0),
                         child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                             children: [
-                              Text('Mistakes :'),
+                              Obx(
+                                () => Text(translate.check.value == false
+                                    ? 'Misstake'
+                                    : 'កំហូច'),
+                              )
                             ]),
                       ),
                     ),

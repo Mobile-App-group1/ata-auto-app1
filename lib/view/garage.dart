@@ -1,19 +1,22 @@
+import 'package:ata_auto_app/model/garage_tr.dart';
 import 'package:ata_auto_app/responsive/responsive.dart';
 import 'package:ata_auto_app/view/garage_product.dart';
 import 'package:ata_auto_app/widget/dailogsearch.dart';
 import 'package:ata_auto_app/widget/form.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:multi_dropdown/multiselect_dropdown.dart';
+
+import '../controller/translate.dart';
 
 class Garage_Screen extends StatelessWidget {
-  const Garage_Screen({super.key});
-
+  Garage_Screen({super.key});
+  final Translatedata translate = Get.put(Translatedata());
+  TextEditingController textsearch = TextEditingController();
   @override
   Widget build(BuildContext context) {
     final width = MediaQuery.of(context).size.width;
     final height = MediaQuery.of(context).size.height;
-    TextEditingController textsearch = TextEditingController();
+
     return Scaffold(
       body: SingleChildScrollView(
         child: Column(
@@ -80,12 +83,15 @@ class Garage_Screen extends StatelessWidget {
                               ),
                             ),
                             Padding(
-                              padding: const EdgeInsets.only(left: 8),
-                              child: Text(
-                                'Name',
-                                style: gettextstylblackname(context),
-                              ),
-                            ),
+                                padding: const EdgeInsets.only(left: 8),
+                                child: Obx(
+                                  () => Text(
+                                    translate.check.value == false
+                                        ? garage_tr[0].name_eg
+                                        : garage_tr[0].name_kh,
+                                    style: gettextstylblackname(context),
+                                  ),
+                                )),
                             Padding(
                               padding: const EdgeInsets.only(left: 8, top: 8),
                               child: Row(
@@ -95,12 +101,15 @@ class Garage_Screen extends StatelessWidget {
                                     color: Colors.red,
                                   ),
                                   Padding(
-                                    padding: const EdgeInsets.only(right: 8),
-                                    child: Text(
-                                      'Location',
-                                      style: gettextstylered(context),
-                                    ),
-                                  ),
+                                      padding: const EdgeInsets.only(right: 8),
+                                      child: Obx(
+                                        () => Text(
+                                          translate.check.value == false
+                                              ? garage_tr[0].locatione_eg
+                                              : garage_tr[0].locatione_kh,
+                                          style: gettextstylered(context),
+                                        ),
+                                      )),
                                 ],
                               ),
                             ),

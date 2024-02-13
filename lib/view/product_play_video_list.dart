@@ -1,11 +1,16 @@
+import 'package:ata_auto_app/widget/product_video.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
+import '../controller/translate.dart';
+import '../model/product_tr_video.dart';
 import '../responsive/responsive.dart';
 import '../widget/boxbutton.dart';
+import '../widget/playList_videro.dart';
 
 class Product_Playlist extends StatelessWidget {
   Product_Playlist({super.key});
-
+  final Translatedata translate = Get.put(Translatedata());
   Future<void> _dialogBuilder(BuildContext context) {
     return showDialog<void>(
       context: context,
@@ -47,7 +52,11 @@ class Product_Playlist extends StatelessWidget {
     final higth = MediaQuery.of(context).size.height;
     return Scaffold(
       appBar: AppBar(
-        title: const Text('NAME '),
+        title: Text(
+          translate.check.value == false
+              ? videoTrProduct[0].name_eg
+              : videoTrProduct[0].name_kh,
+        ),
       ),
       body: SingleChildScrollView(
         child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
@@ -62,11 +71,15 @@ class Product_Playlist extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  'Tital :',
+                  translate.check.value == false
+                      ? videoTrProduct[0].tital_eg
+                      : videoTrProduct[0].tital_kh,
                   style: gettextstylebluebold(context),
                 ),
                 Text(
-                  'Disription :',
+                  translate.check.value == false
+                      ? videoTrProduct[0].disciption_eg
+                      : videoTrProduct[0].disciption_kh,
                   style: gettextstylblack(context),
                 ),
               ],
@@ -82,45 +95,7 @@ class Product_Playlist extends StatelessWidget {
                 childAspectRatio: (1 / 0.3),
                 clipBehavior: Clip.antiAlias,
                 children: List.generate(10, (index) {
-                  return GestureDetector(
-                      child: Card(
-                    child: Row(
-                      children: [
-                        Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: Container(
-                            width: width * 0.28,
-                            decoration: BoxDecoration(
-                                color: Colors.white,
-                                borderRadius: BorderRadius.circular(10)),
-                            child: const Center(
-                              child: Text('IMG'),
-                            ),
-                          ),
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text('Name'),
-                              SizedBox(
-                                  width: width * 0.6,
-                                  child: const Row(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceBetween,
-                                    children: [
-                                      Text('Time'),
-                                      Text('Price'),
-                                    ],
-                                  ))
-                            ],
-                          ),
-                        )
-                      ],
-                    ),
-                  ));
+                  return Product_Video_List(translate: translate);
                 })),
           ),
         ]),

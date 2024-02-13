@@ -1,4 +1,5 @@
 import 'package:ata_auto_app/controller/translate.dart';
+import 'package:ata_auto_app/view/alert_buy_sefety.dart';
 import 'package:ata_auto_app/widget/boxbutton.dart';
 import 'package:ata_auto_app/widget/product.dart';
 import 'package:flutter/material.dart';
@@ -165,7 +166,7 @@ class Datalist_Product_Home extends StatelessWidget {
       bottomNavigationBar: ButtonBarTheme(
           data: const ButtonBarThemeData(),
           child: Container(
-            height: height * 0.08,
+            height: height * 0.14,
             decoration: BoxDecoration(
                 color: Colors.white,
                 boxShadow: [
@@ -177,32 +178,67 @@ class Datalist_Product_Home extends StatelessWidget {
                 borderRadius: const BorderRadius.only(
                     topLeft: Radius.circular(10),
                     topRight: Radius.circular(10))),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            child: Column(
               children: [
-                GestureDetector(
-                  onTap: () async {},
-                  child: ButtonProduct(
-                      backgrounColors: Colors.blue,
-                      bordercolos: Colors.blue,
-                      colorstext: Colors.white,
-                      name: 'Telegram'),
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Container(
+                    width: width,
+                    height: height * 0.05,
+                    decoration: BoxDecoration(
+                        color: colorsWhite,
+                        border: Border.all(width: 1, color: Colors.red),
+                        borderRadius: BorderRadius.circular(5)),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.only(left: 10),
+                          child: Text(
+                            'safety',
+                            style: gettextstylebluebold(context),
+                          ),
+                        ),
+                        IconButton(
+                            onPressed: () async {
+                              DialogTipForUserBuy(context);
+                            },
+                            icon: const Icon(
+                              Icons.security,
+                              color: Colors.red,
+                            ))
+                      ],
+                    ),
+                  ),
                 ),
-                GestureDetector(
-                  onTap: () async {},
-                  child: ButtonProduct(
-                      backgrounColors: Colors.white,
-                      bordercolos: Colors.pink,
-                      colorstext: Colors.pink,
-                      name: 'Facebook'),
-                ),
-                GestureDetector(
-                  onTap: () async {},
-                  child: ButtonProduct(
-                      backgrounColors: Colors.green,
-                      bordercolos: Colors.green,
-                      colorstext: Colors.white,
-                      name: 'Call'),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    GestureDetector(
+                      onTap: () async {},
+                      child: ButtonProduct(
+                          backgrounColors: Colors.blue,
+                          bordercolos: Colors.blue,
+                          colorstext: Colors.white,
+                          name: 'Telegram'),
+                    ),
+                    GestureDetector(
+                      onTap: () async {},
+                      child: ButtonProduct(
+                          backgrounColors: Colors.white,
+                          bordercolos: Colors.pink,
+                          colorstext: Colors.pink,
+                          name: 'Messeger'),
+                    ),
+                    GestureDetector(
+                      onTap: () async {},
+                      child: ButtonProduct(
+                          backgrounColors: Colors.green,
+                          bordercolos: Colors.green,
+                          colorstext: Colors.white,
+                          name: 'Call'),
+                    ),
+                  ],
                 ),
               ],
             ),

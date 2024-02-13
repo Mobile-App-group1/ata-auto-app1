@@ -4,13 +4,15 @@ import 'package:ata_auto_app/widget/button.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+import '../controller/translate.dart';
 import '../widget/form.dart';
 import '../responsive/responsive.dart';
+import 'tell_use_about_app.dart';
 
 // ignore: must_be_immutable
 class Signin_Screen extends StatelessWidget {
   Signin_Screen({super.key});
-
+  final Translatedata translate = Get.put(Translatedata());
   TextEditingController email = TextEditingController();
   TextEditingController password = TextEditingController();
   @override
@@ -42,12 +44,16 @@ class Signin_Screen extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         InputForm(
-                          hintText: 'Phone number or email',
+                          hintText: translate.check.value == false
+                              ? 'Phone number or email'
+                              : 'លេខទូរសព្ទ​ រឺជីមែល',
                           controller: email,
                         ),
                         Inputpassword(
                           controller: password,
-                          hintText: 'Password',
+                          hintText: translate.check.value == false
+                              ? 'Password'
+                              : 'លេខសំងាត់',
                         ),
                         const SizedBox(
                           height: 10,
@@ -58,7 +64,9 @@ class Signin_Screen extends StatelessWidget {
                           },
                           child: Boxbutton(
                             colorbtn: Colors.blue,
-                            namebtn: 'Login',
+                            namebtn: translate.check.value == false
+                                ? 'Login'
+                                : 'ចូលកម្មវិធី',
                             colortext: Colors.white,
                           ),
                         ),
@@ -69,7 +77,9 @@ class Signin_Screen extends StatelessWidget {
                           onTap: () async => Get.to(SignUp_Screen()),
                           child: Boxbutton(
                             colorbtn: Colors.blue,
-                            namebtn: 'Sign Up',
+                            namebtn: translate.check.value == false
+                                ? 'Sig up'
+                                : 'ចោះឈ្មោះ',
                             colortext: Colors.white,
                           ),
                         ),
@@ -105,7 +115,7 @@ class Signin_Screen extends StatelessWidget {
                               )
                             ],
                           ),
-                        )
+                        ),
                       ]),
                 ),
               ],

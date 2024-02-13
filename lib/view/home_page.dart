@@ -52,8 +52,8 @@ class Home_Page extends StatelessWidget {
                   child: Obx(
                     () => Text(
                       translate.check.value == false
-                          ? 'Product'
-                          : 'គ្រុមមុខទំនិញទាំងអស់',
+                          ? 'All Product'
+                          : 'ទំនិញទាំងអស់',
                       style: gettextstyleblueboldunderline(context),
                     ),
                   ),

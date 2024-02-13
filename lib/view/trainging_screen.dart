@@ -1,15 +1,15 @@
+import 'package:ata_auto_app/model/product_tr_video.dart';
 import 'package:ata_auto_app/responsive/responsive.dart';
 import 'package:ata_auto_app/view/treeview.dart';
 import 'package:ata_auto_app/view/payment_cours_training.dart';
 import 'package:ata_auto_app/view/product_play_video_list.dart';
-import 'package:buttons_tabbar/buttons_tabbar.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-
-import '../model/pupulershop.dart';
+import '../controller/translate.dart';
 
 class Training_Screen extends StatelessWidget {
-  const Training_Screen({super.key});
+  Training_Screen({super.key});
+  Translatedata translate = Get.put(Translatedata());
   @override
   Widget build(BuildContext context) {
     final height = MediaQuery.of(context).size.height;
@@ -20,22 +20,29 @@ class Training_Screen extends StatelessWidget {
           length: 3,
           child: Column(
             children: <Widget>[
-              ButtonsTabBar(
-                backgroundColor: colorBlue,
-                unselectedBackgroundColor: Colors.grey[300],
+              TabBar(
                 unselectedLabelStyle: gettextstylebg(context),
-                labelStyle: const TextStyle(
-                    color: Colors.white, fontWeight: FontWeight.bold),
-                tabs: const [
-                  Tab(
-                    icon: Icon(Icons.play_circle_fill_outlined),
-                    text: 'Playlist',
+                labelStyle: TextStyle(
+                    color: Colors.blue[400], fontWeight: FontWeight.bold),
+                tabs: [
+                  Obx(
+                    () => Tab(
+                      icon: const Icon(Icons.play_circle_fill_outlined),
+                      text: translate.check == false
+                          ? 'Play Video '
+                          : 'មើលវីដីអូ',
+                    ),
                   ),
-                  Tab(
-                    icon: Icon(Icons.document_scanner),
-                    text: 'Document',
-                  ),
-                  Tab(icon: Icon(Icons.desktop_mac_outlined), text: 'Cours'),
+                  Obx(() => Tab(
+                        icon: Icon(Icons.document_scanner),
+                        text: translate.check == false ? 'Document ' : 'ឯកសារ',
+                      )),
+                  Obx(
+                    () => Tab(
+                      icon: Icon(Icons.desktop_mac_outlined),
+                      text: translate.check == false ? 'Course' : 'វគ្គសិក្សា',
+                    ),
+                  )
                 ],
               ),
               Expanded(
@@ -83,29 +90,43 @@ class Training_Screen extends StatelessWidget {
                                       ),
                                     ),
                                     Padding(
-                                      padding: const EdgeInsets.only(left: 8),
-                                      child: Text(
-                                        'Name :',
-                                        style: gettextstylblackname(context),
-                                      ),
-                                    ),
+                                        padding: const EdgeInsets.only(left: 8),
+                                        child: Obx(
+                                          () => Text(
+                                            translate.check.value == false
+                                                ? videoTrProduct[0].name_eg
+                                                : videoTrProduct[0].name_kh,
+                                            style:
+                                                gettextstylblackname(context),
+                                          ),
+                                        )),
                                     Padding(
-                                      padding: const EdgeInsets.only(left: 8),
-                                      child: Text(
-                                        'Discription :',
-                                        style: gettextstylgreytital(context),
-                                      ),
-                                    ),
+                                        padding: const EdgeInsets.only(left: 8),
+                                        child: Obx(
+                                          () => Text(
+                                            translate.check.value == false
+                                                ? videoTrProduct[0]
+                                                    .disciption_eg
+                                                : videoTrProduct[0]
+                                                    .disciption_kh,
+                                            style:
+                                                gettextstylgreytital(context),
+                                          ),
+                                        )),
                                     Padding(
                                       padding: const EdgeInsets.only(left: 8),
                                       child: Row(
                                         mainAxisAlignment:
                                             MainAxisAlignment.spaceBetween,
                                         children: [
-                                          Text(
-                                            'Tital',
-                                            style:
-                                                gettextstylgreytital(context),
+                                          Obx(
+                                            () => Text(
+                                              translate.check.value == false
+                                                  ? videoTrProduct[0].tital_eg
+                                                  : videoTrProduct[0].tital_kh,
+                                              style:
+                                                  gettextstylgreytital(context),
+                                            ),
                                           ),
                                           Padding(
                                             padding:

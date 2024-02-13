@@ -1,17 +1,19 @@
 import 'package:ata_auto_app/responsive/responsive.dart';
 import 'package:ata_auto_app/view/mutiscreen.dart';
+import 'package:ata_auto_app/view/tell_use_about_app.dart';
 import 'package:ata_auto_app/widget/form.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:multi_dropdown/multiselect_dropdown.dart';
 
+import '../controller/translate.dart';
 import '../widget/button.dart';
 import 'subscription.dart';
 
 // ignore: must_be_immutable
 class SignUp_Screen extends StatelessWidget {
   SignUp_Screen({super.key});
-
+  final Translatedata translate = Get.put(Translatedata());
   TextEditingController email = TextEditingController();
   TextEditingController username = TextEditingController();
   TextEditingController password = TextEditingController();
@@ -46,20 +48,28 @@ class SignUp_Screen extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         InputForm(
-                          hintText: 'Phone number or email',
+                          hintText: translate.check.value == false
+                              ? 'Phone number or email'
+                              : 'លេខទូរសព្ទ​ រឺជីមែល',
                           controller: email,
                         ),
                         InputForm(
-                          hintText: 'User name',
+                          hintText: translate.check.value == false
+                              ? 'User name'
+                              : 'ឈ្មោះអ្នកប្រើប្រាស់',
                           controller: username,
                         ),
                         Inputpassword(
                           controller: password,
-                          hintText: 'Password',
+                          hintText: translate.check.value == false
+                              ? 'Password'
+                              : 'លេខសំងាត់',
                         ),
                         Inputpassword(
                           controller: confirmpassword,
-                          hintText: 'Confirm password',
+                          hintText: translate.check.value == false
+                              ? 'Comfirm ​Password'
+                              : 'បញ្ជាក់លេខសំងាត់',
                         ),
                         SizedBox(
                           height: height * 0.01,
@@ -102,10 +112,12 @@ class SignUp_Screen extends StatelessWidget {
                           height: height * 0.02,
                         ),
                         GestureDetector(
-                          onTap: () async => Get.to((RoutesPage())),
+                          onTap: () async => Get.to((Tell_User())),
                           child: Boxbutton(
                             colorbtn: Colors.blue,
-                            namebtn: 'Sign Up',
+                            namebtn: translate.check.value == false
+                                ? 'Sig up'
+                                : 'ចោះឈ្មោះ',
                             colortext: Colors.white,
                           ),
                         ),

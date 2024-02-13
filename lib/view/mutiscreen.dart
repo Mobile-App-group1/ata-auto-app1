@@ -1,8 +1,8 @@
 import 'dart:io';
-
 import 'package:ata_auto_app/controller/routhpage.dart';
 import 'package:ata_auto_app/controller/translate.dart';
-import 'package:ata_auto_app/view/tall_me_screen.dart';
+import 'package:ata_auto_app/view/signup_screen.dart';
+import 'package:ata_auto_app/view/tell_use_about_app.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
@@ -88,7 +88,7 @@ class RoutesPage extends StatelessWidget {
                         crossAxisAlignment: CrossAxisAlignment.center,
                         mainAxisAlignment: MainAxisAlignment.start,
                         children: [
-                          Padding(
+                          const Padding(
                             padding: const EdgeInsets.all(8.0),
                             child: Icon(Icons.phone),
                           ),
@@ -115,23 +115,172 @@ class RoutesPage extends StatelessWidget {
                           children: [
                             Row(
                               children: [
-                                Padding(
+                                const Padding(
                                   padding: const EdgeInsets.all(8.0),
-                                  child: Icon(Icons.logout),
+                                  child: Icon(Icons.language),
                                 ),
                                 Padding(
                                     padding: const EdgeInsets.all(8.0),
                                     child: Obx(
                                       () => Text(translate.check.value == false
-                                          ? 'Logout :'
-                                          : 'ចេញពីចាខោន'),
+                                          ? 'language :'
+                                          : 'ភាសារ'),
                                     ))
                               ],
                             ),
                             Padding(
                                 padding: const EdgeInsets.all(8.0),
-                                child: Icon(Icons.arrow_right)),
+                                child: Container(
+                                  width: width * 0.3,
+                                  decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(10),
+                                      border: Border.all(
+                                          width: 1,
+                                          color: Colors.blue.shade400)),
+                                  child: Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      GestureDetector(
+                                          onTap: () async {
+                                            translate.CheckTracslate();
+                                          },
+                                          child: Obx(
+                                            () => Container(
+                                              width: width * 0.145,
+                                              decoration: BoxDecoration(
+                                                  color: translate.check ==
+                                                          false
+                                                      ? Colors.blue[400]
+                                                      : colorsWhite,
+                                                  borderRadius:
+                                                      const BorderRadius.only(
+                                                          topLeft:
+                                                              Radius.circular(
+                                                                  10),
+                                                          bottomLeft:
+                                                              Radius.circular(
+                                                                  10))),
+                                              child: Center(
+                                                child: Text(
+                                                  'En',
+                                                  style: TextStyle(
+                                                      color: translate.check ==
+                                                              false
+                                                          ? colorsWhite
+                                                          : Colors.grey,
+                                                      fontWeight:
+                                                          FontWeight.bold),
+                                                ),
+                                              ),
+                                            ),
+                                          )),
+                                      GestureDetector(
+                                          onTap: () async {
+                                            translate.CheckTracslate();
+                                          },
+                                          child: Obx(
+                                            () => Container(
+                                              width: width * 0.145,
+                                              decoration: BoxDecoration(
+                                                  color: translate.check ==
+                                                          false
+                                                      ? colorsWhite
+                                                      : Colors.blue[400],
+                                                  borderRadius:
+                                                      const BorderRadius.only(
+                                                          topRight:
+                                                              Radius.circular(
+                                                                  10),
+                                                          bottomRight:
+                                                              Radius.circular(
+                                                                  10))),
+                                              child: Center(
+                                                child: Text('Kh',
+                                                    style: TextStyle(
+                                                        color:
+                                                            translate.check ==
+                                                                    false
+                                                                ? colorBlue
+                                                                : colorsWhite,
+                                                        fontWeight:
+                                                            FontWeight.bold)),
+                                              ),
+                                            ),
+                                          )),
+                                    ],
+                                  ),
+                                )),
                           ]),
+                    ),
+                  ),
+                ),
+                Padding(
+                  padding: EdgeInsets.all(8.0),
+                  child: GestureDetector(
+                    onTap: () async {
+                      Get.to(Tell_User());
+                    },
+                    child: Card(
+                      child: SizedBox(
+                        height: height * 0.08,
+                        child: Row(
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Row(
+                              children: [
+                                const Padding(
+                                  padding: const EdgeInsets.all(8.0),
+                                  child: Icon(Icons.engineering),
+                                ),
+                                Padding(
+                                    padding: const EdgeInsets.all(8.0),
+                                    child: Obx(
+                                      () => Text(translate.check.value == false
+                                          ? 'Tell Me :'
+                                          : 'ប្រាប់ខ្ញុំ'),
+                                    ))
+                              ],
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+                Padding(
+                  padding: EdgeInsets.all(8.0),
+                  child: GestureDetector(
+                    onTap: () async => Get.to(SignUp_Screen()),
+                    child: Card(
+                      child: SizedBox(
+                        height: height * 0.08,
+                        child: Row(
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Row(
+                                children: [
+                                  const Padding(
+                                    padding: const EdgeInsets.all(8.0),
+                                    child: Icon(Icons.logout),
+                                  ),
+                                  Padding(
+                                      padding: const EdgeInsets.all(8.0),
+                                      child: Obx(
+                                        () => Text(
+                                            translate.check.value == false
+                                                ? 'Logout :'
+                                                : 'ចេញពីចាខោន'),
+                                      ))
+                                ],
+                              ),
+                              const Padding(
+                                  padding: const EdgeInsets.all(8.0),
+                                  child: Icon(Icons.arrow_right)),
+                            ]),
+                      ),
                     ),
                   ),
                 ),
@@ -154,7 +303,7 @@ class RoutesPage extends StatelessWidget {
                           children: [
                             Row(
                               children: [
-                                Padding(
+                                const Padding(
                                   padding: const EdgeInsets.all(8.0),
                                   child: Icon(Icons.exit_to_app),
                                 ),
@@ -176,56 +325,7 @@ class RoutesPage extends StatelessWidget {
               ]),
         ),
       ),
-      appBar: AppBar(
-        actions: [
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Container(
-                decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(10),
-                    color: Colors.white,
-                    boxShadow: [
-                      BoxShadow(
-                        blurRadius: 4,
-                        color: Colors.grey.withOpacity(0.5),
-                      )
-                    ]),
-                child: Obx(
-                  () => TextButton.icon(
-                      onPressed: () async {
-                        Get.to(Tell_User_About_UseApp());
-                      },
-                      icon: Icon(Icons.engineering),
-                      label: Text(translate.check.value == false
-                          ? 'Tell Me'
-                          : 'ប្រាប់ខ្ញុំ')),
-                )),
-          ),
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Container(
-                decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(10),
-                    color: Colors.white,
-                    boxShadow: [
-                      BoxShadow(
-                        blurRadius: 4,
-                        color: Colors.grey.withOpacity(0.5),
-                      )
-                    ]),
-                child: Obx(
-                  () => TextButton(
-                      clipBehavior: Clip.antiAlias,
-                      onPressed: () async {
-                        translate.CheckTracslate();
-                      },
-                      child: Text(translate.check.value == false
-                          ? 'ENGLISH'
-                          : 'KHMER')),
-                )),
-          )
-        ],
-      ),
+      appBar: AppBar(),
       body: Obx(() => _widgetOptions[routesController.selectedIndex.value]),
       bottomNavigationBar: Obx(() => FlashyTabBar(
             onItemSelected: routesController.changeIndex,

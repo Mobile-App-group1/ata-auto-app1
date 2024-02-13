@@ -4,9 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../controller/translate.dart';
-import '../responsive/responsive.dart';
-import '../widget/dailogsearch.dart';
-import 'datalist_prodcut_screen.dart';
 
 class All_Product extends StatelessWidget {
   All_Product({super.key});
