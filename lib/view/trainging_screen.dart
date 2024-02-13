@@ -1,5 +1,5 @@
 import 'package:ata_auto_app/responsive/responsive.dart';
-import 'package:ata_auto_app/responsive/treeview.dart';
+import 'package:ata_auto_app/view/treeview.dart';
 import 'package:ata_auto_app/view/payment_cours_training.dart';
 import 'package:ata_auto_app/view/product_play_video_list.dart';
 import 'package:buttons_tabbar/buttons_tabbar.dart';
