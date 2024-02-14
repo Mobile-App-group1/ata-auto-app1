@@ -44,18 +44,42 @@ class RoutesPage extends StatelessWidget {
                   children: [
                     Padding(
                       padding: const EdgeInsets.all(8.0),
-                      child: Container(
-                        height: height * 0.15,
-                        width: width * 0.3,
-                        decoration: BoxDecoration(
-                            color: colorBlue,
-                            borderRadius: BorderRadius.circular(height * 0.1)),
-                        child: Center(
-                          child: Text(
-                            'Profile',
-                            style: gettextstylewhitesmaill(context),
+                      child: Stack(
+                        children: [
+                          Container(
+                            height: height * 0.15,
+                            width: width * 0.3,
+                            decoration: BoxDecoration(
+                                color: colorBlue,
+                                borderRadius:
+                                    BorderRadius.circular(height * 0.1)),
+                            child: const Center(
+                                child: Icon(
+                              Icons.person,
+                              size: 50,
+                              color: colorsWhite,
+                            )),
                           ),
-                        ),
+                          Positioned(
+                              bottom: 0,
+                              right: 8,
+                              child: Container(
+                                width: width * 0.1,
+                                height: width * 0.1,
+                                decoration: BoxDecoration(
+                                    borderRadius:
+                                        BorderRadius.circular(width * 0.05),
+                                    color: colorBlue,
+                                    border: Border.all(
+                                        width: 1, color: colorsWhite)),
+                                child: IconButton(
+                                    onPressed: () {},
+                                    icon: const Icon(
+                                      Icons.camera_alt,
+                                      color: colorsWhite,
+                                    )),
+                              ))
+                        ],
                       ),
                     ),
                     Column(
@@ -71,7 +95,7 @@ class RoutesPage extends StatelessWidget {
                         Padding(
                           padding: const EdgeInsets.all(8.0),
                           child: Text(
-                            'ID :',
+                            'Email ',
                             style: gettextstylblackdesription(context),
                           ),
                         ),
